@@ -1,0 +1,42 @@
+def create_tables(cursor):
+    # Create a staging table to store all the data temporarily
+    cursor.execute("""
+        CREATE OR REPLACE TABLE Staging_Table (
+            ID INT,
+            Name VARCHAR(255),
+            DOB DATE,
+            Vaccination_Type VARCHAR(10),
+            Vaccination_Date DATE,
+            Country VARCHAR(10),
+            Free_Or_Paid CHAR(1)
+        );
+    """)
+    # Create other country-specific tables
+    cursor.execute("""
+        CREATE OR REPLACE TABLE USA_Table (
+            ID INT,
+            Name VARCHAR(255),
+            Vaccination_Type VARCHAR(10),
+            Vaccination_Date DATE
+        );
+    """)
+    cursor.execute("""
+        CREATE OR REPLACE TABLE India_Table (
+            ID INT,
+            Name VARCHAR(255),
+            DOB DATE,
+            Vaccination_Type VARCHAR(10),
+            Vaccination_Date DATE,
+            Free_Or_Paid CHAR(1)
+        );
+    """)
+    cursor.execute("""
+        CREATE OR REPLACE TABLE AUS_Table (
+            ID INT,
+            Name VARCHAR(255),
+            DOB DATE,
+            Vaccination_Type VARCHAR(10),
+            Vaccination_Date DATE
+        );
+    """)
+    print("Tables created successfully!")
