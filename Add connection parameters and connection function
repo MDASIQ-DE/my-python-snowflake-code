@@ -1,0 +1,35 @@
+import snowflake.connector
+from datetime import datetime
+
+# Connection parameters for Snowflake
+connection_params = {
+    'user': 'xxx',
+    'password': 'xxx',
+    'account': 'xxx',
+    'warehouse': 'xxx',
+    'database': 'xxx',
+    'schema': 'xxx'
+}
+
+# Function to connect to Snowflake
+def connect_to_snowflake():
+    # Establish a connection to Snowflake using the provided parameters
+    return snowflake.connector.connect(**connection_params)
+
+# Function to create necessary tables in Snowflake
+def create_tables(cursor):
+    # Create a staging table to store all the data temporarily
+    cursor.execute("""
+        CREATE OR REPLACE TABLE Staging_Table (
+            ID INT,
+            Name VARCHAR(255),
+            DOB DATE,
+            Vaccination_Type VARCHAR(10),
+            Vaccination_Date DATE,
+            Country VARCHAR(10),
+            Free_Or_Paid CHAR(1)
+        );
+    """)
+
+    # Create a table for USA-specific data
+    cursor.execute("""
