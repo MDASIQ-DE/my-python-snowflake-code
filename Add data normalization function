@@ -1,0 +1,11 @@
+def normalize_data(data, country):
+    normalized_data = []
+    for row in data:
+        if country == "USA":
+            normalized_data.append((row[0], row[1], None, row[2], datetime.strptime(row[3], '%m%d%Y').date(), "USA", None))
+        elif country == "India":
+            normalized_data.append((row[0], row[1], datetime.strptime(row[2], '%m/%d/%Y').date(), row[3], datetime.strptime(row[4], '%m/%d/%Y').date(), "India", row[5]))
+        elif country == "AUS":
+            dob = datetime.strptime(row[3], '%m/%d/%Y').date() if row[3] else None
+            normalized_data.append((row[0], row[1], dob, row[2], datetime.strptime(row[4], '%m/%d/%Y').date(), "AUS", None))
+    return normalized_data
