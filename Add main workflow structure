@@ -1,0 +1,14 @@
+def main():
+    conn = connect_to_snowflake()
+    cursor = conn.cursor()
+
+    try:
+        create_tables(cursor)
+        load_to_staging(cursor, normalize_data(usa_data, "USA"))
+        load_to_staging(cursor, normalize_data(india_data, "India"))
+        load_to_staging(cursor, normalize_data(aus_data, "AUS"))
+        transform_and_load(cursor)
+    finally:
+        cursor.close()
+        conn.close()
+        print("Connection closed.")
