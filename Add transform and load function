@@ -1,0 +1,27 @@
+def transform_and_load(cursor):
+    print("Transforming and loading data into country-specific tables...")
+    # USA Table
+    cursor.execute("""
+        INSERT INTO USA_Table (ID, Name, Vaccination_Type, Vaccination_Date)
+        SELECT ID, Name, Vaccination_Type, Vaccination_Date
+        FROM Staging_Table
+        WHERE Country = 'USA';
+    """)
+
+    # India Table
+    cursor.execute("""
+        INSERT INTO India_Table (ID, Name, DOB, Vaccination_Type, Vaccination_Date, Free_Or_Paid)
+        SELECT ID, Name, DOB, Vaccination_Type, Vaccination_Date, Free_Or_Paid
+        FROM Staging_Table
+        WHERE Country = 'India';
+    """)
+
+    # AUS Table
+    cursor.execute("""
+        INSERT INTO AUS_Table (ID, Name, DOB, Vaccination_Type, Vaccination_Date)
+        SELECT ID, Name, DOB, Vaccination_Type, Vaccination_Date
+        FROM Staging_Table
+        WHERE Country = 'AUS';
+    """)
+
+    print("Data loaded into country-specific tables successfully!")
