@@ -1,0 +1,5 @@
+try:
+    # Code block here
+except Exception as e:
+    print(f"Error occurred: {e}")
+    conn.rollback()
