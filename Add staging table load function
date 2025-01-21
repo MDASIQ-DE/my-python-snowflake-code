@@ -1,0 +1,8 @@
+def load_to_staging(cursor, data):
+    print("Loading data into Staging Table...")
+    for row in data:
+        cursor.execute("""
+            INSERT INTO Staging_Table (ID, Name, DOB, Vaccination_Type, Vaccination_Date, Country, Free_Or_Paid)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, row)
+    print("Data loaded into Staging Table successfully!")
